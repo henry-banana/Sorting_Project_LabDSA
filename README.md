@@ -1,1 +1,1 @@
-# Sorting_Project_LabDSA
+# A mini project in FIT HCMUS -_-

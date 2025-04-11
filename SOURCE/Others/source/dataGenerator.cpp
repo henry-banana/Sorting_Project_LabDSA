@@ -57,13 +57,13 @@ void generateData(std::vector<int> &arr, int n, int dataType)
 		generateRandomData(arr, n);
 		break;
 	case 1:	
-		generateSortedData(arr, n);
+		generateNearlySortedData(arr, n);
 		break;
 	case 2:	
-		generateReverseData(arr, n);
+		generateSortedData(arr, n);
 		break;
 	case 3:	
-		generateNearlySortedData(arr, n);
+		generateReverseData(arr, n);
 		break;
 	default:
 		std::cout << "Error: unknown data type!\n";
@@ -76,11 +76,11 @@ std::string getDataOrderName(int data_order_id) {
         case 0:
             return "Randomized data";
         case 1:
-            return "Sorted data";
-        case 2:
-            return "Reverse sorted data";
-        case 3:
             return "Nearly sorted data";
+        case 2:
+            return "Sorted data";
+        case 3:
+            return "Reverse sorted data";
         default:
             return "Unknown data order";
     }
@@ -89,9 +89,9 @@ std::string getDataOrderName(int data_order_id) {
 int getDataOrderID(char agr_flag[]) {
 
     if (!strcmp(agr_flag, "-rand")) return 0;
-    else if (!strcmp(agr_flag, "-sorted")) return 1;
-    else if (!strcmp(agr_flag, "-rev")) return 2;
-    else if (!strcmp(agr_flag, "-nsorted")) return 3;
+    else if (!strcmp(agr_flag, "-nsorted")) return 1;
+    else if (!strcmp(agr_flag, "-sorted")) return 2;
+    else if (!strcmp(agr_flag, "-rev")) return 3;
 
     return -1;
 }

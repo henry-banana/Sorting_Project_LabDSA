@@ -3,6 +3,9 @@
 SortExperiment::SortExperiment() {
     arr.resize(NUMBER_SORT_ALGORITHM);
     results.resize(NUMBER_SORT_ALGORITHM);
+    output_parameter = -1;
+    input_size = 0;
+    is_running_all = false;
 }
 
 SortExperiment::~SortExperiment() {
@@ -32,10 +35,11 @@ void SortExperiment::printResult() {
         for (int i = 0; i < number_data_order; i++) {
             if (!is_input_from_file) {
                 if (is_running_all) {
-                    std::cout << '\n';
+                    std::cout << "\nInput order: " << getDataOrderName(i) << '\n';
                 }
-        
-                std::cout << "Input order: " << getDataOrderName(i) << '\n';
+                else {
+                    std::cout << "Input order: " << getDataOrderName(data_order_id) << '\n';
+                }        
             }
 
             std::cout << "------------------------------------\n";
@@ -63,11 +67,11 @@ void SortExperiment::printResult() {
         std::cout << "Input size: " << input_size << '\n';
         
         if (!is_input_from_file) {
-            std::cout << "\nInput order: " << getDataOrderName(data_order_id) << '\n';
+            std::cout << "Input order: " << getDataOrderName(data_order_id) << '\n';
         }
 
         std::cout << "---------------------------------------------\n";
-        std::cout << "Running time: " << results[0].running_time.count() << " | " << results[1].running_time.count() << '\n';
+        std::cout << "Running time: " << results[0].running_time.count() << " ms | " << results[1].running_time.count() << " ms\n";
         std::cout << "Comparisons: " << results[0].count_comparison << " | " << results[1].count_comparison << '\n';
     }
 
@@ -104,7 +108,7 @@ void SortExperiment::runAlgorithmMode() {
     }
 
     if (loops == 1) {
-        char filename[] = "output.txt";
+        std::string filename = "output.txt";
         writeData(temp, filename);
     }
 }
@@ -145,20 +149,23 @@ void sort(std::vector<int> &arr, int algorithm_id, size_t &count_comparison) {
         case HEAP_SORT:
             heapSort(arr, count_comparison);
             break;
-        // case MERGE_SORT:
-        //     mergeSort(arr, count_comparison);
-        //     break;
-        // case QUICK_SORT:
-        //     quickSort(arr, count_comparison);
-        //     break;
-        // case COUNTING_SORT:
-        //     countingSort(arr, count_comparison);
-        //     break;
+        case MERGE_SORT:
+            mergeSort(arr, count_comparison);
+            break;
+        case QUICK_SORT:
+           quickSort(arr, count_comparison);
+            break;
+        case COUNTING_SORT:
+            countingSort(arr, count_comparison);
+            break;
         case RADIX_SORT:
             radixSort(arr, count_comparison);
             break;
         case FLASH_SORT:
             flashSort(arr, count_comparison);
+            break;
+        case BINARY_INSERTION_SORT:
+            binaryInsertionSort(arr, count_comparison);
             break;
         default:
             break;
@@ -187,20 +194,23 @@ void sort(std::vector<int> &arr, int algorithm_id, std::chrono::duration<double,
         case HEAP_SORT:
             heapSort(arr);
             break;
-        // case MERGE_SORT:
-        //     mergeSort(arr);
-        //     break;
-        // case QUICK_SORT:
-        //     quickSort(arr);
-        //     break;
-        // case COUNTING_SORT:
-        //     countingSort(arr);
-        //     break;
+        case MERGE_SORT:
+            mergeSort(arr);
+            break;
+        case QUICK_SORT:
+            quickSort(arr);
+            break;
+        case COUNTING_SORT:
+            countingSort(arr);
+            break;
         case RADIX_SORT:
             radixSort(arr);
             break;
         case FLASH_SORT:
             flashSort(arr);
+            break;
+        case BINARY_INSERTION_SORT:
+            binaryInsertionSort(arr);
             break;
         default:
             break;

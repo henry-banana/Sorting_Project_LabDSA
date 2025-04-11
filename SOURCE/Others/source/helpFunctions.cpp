@@ -8,47 +8,18 @@ void swap(T &a, T &b) {
 	b = temp;
 }
 
-int max(int array[], int n, long long &count_comparison) {
-	int max_idx = 0;
-
-	for (int i = 1; ++count_comparison && (i < n); i++)
-		if (++count_comparison && (array[max_idx] < array[i]))
-			max_idx = i;
-
-	return array[max_idx];
-}
-
-int max(int a, int b, long long &count_comparison) {
-	count_comparison++;
-
-	return (a > b) ? a : b;
-}
-
-int max(int array[], int n) {
-	int max_idx = 0;
-
-	for (int i = 1; i < n; i++)
-		if (array[max_idx] < array[i])
-			max_idx = i;
-
-	return array[max_idx];
-}
-
-int max(int a, int b) {
-	return (a > b) ? a : b;
-}
-
 int random(int l, int r) {
     srand((unsigned int)time(nullptr));
 	int ran = rand();
 	
 	return 1ll * ran % (r - l + 1) + l;
 }
-bool readData(std::vector<int> &arr, char *fileName) {
+
+bool readData(std::vector<int> &arr, std::string fileName) {
     if (!arr.empty()) {
         arr.clear();
     }
-    
+
 	std::fstream fin(fileName, std::ios::in);
 
     if (!fin) {
@@ -68,7 +39,7 @@ bool readData(std::vector<int> &arr, char *fileName) {
     return true;
 }
 
-bool writeData(std::vector<int> &arr, char *fileName) {
+bool writeData(std::vector<int> &arr, std::string fileName) {
     std::fstream fout(fileName, std::ios::out);
 
     if (!fout) {
@@ -106,10 +77,10 @@ int getOutputParameterID(char *param_flag) {
 }
 
 bool isOutputParameterID(char *param_flag) {
-    if (getOutputParameterID(param_flag) == -1) {
-        return false;
+    if (getDataOrderID(param_flag) == -1) {
+        return true;
     }
-    return true;
+    return false;
 }
 
 bool isNumber(char *str) {
